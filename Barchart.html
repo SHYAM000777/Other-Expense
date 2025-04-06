@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vouched Values for December 2024 Figures</title>
+
+    <!-- Chart.js for Graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- GSAP for Smooth Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Poppins:wght@300;400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* Moving Background Animation */
+        @keyframes magicBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Full-Screen Styling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Roboto', sans-serif; /* Correct placement */
+            background: linear-gradient(45deg, #fc466b, #3f5efb, #fc466b, #3f5efb);
+            background-size: 400% 400%;
+            animation: magicBG 10s ease infinite;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 20px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+        }
+
+        /* Chart Full-Screen Container */
+        .chart-container {
+            width: 90%;
+            height: 80vh;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📊 Vouched Values for December 2024 Figures</h1>
+    
+    <div class="chart-container">
+        <canvas id="expenseChart"></canvas>
+    </div>
+
+    <script>
+        // Chart Data
+        const ctx = document.getElementById('expenseChart').getContext('2d');
+        const data = {
+            labels: [
+                "Bagging & Contracting", "Stores & Spares", "Insurance", 
+                "Misc. Expenses", "Net Loss Disposal", "Power, Fuel & Water", 
+                "Rent", "Transportation", "Repairs & Maintenance"
+            ],
+            datasets: [
+                {
+                    label: "Amount (In Lakhs)",
+                    data: [919, 885, 689, 3059, 709, 57469, 347, 10821, 2220],
+                    backgroundColor: "#36A2EB",
+                    borderColor: "#36A2EB",
+                    borderWidth: 1,
+                    barThickness: 40 // Increases bar size
+                },
+                {
+                    label: "Value Vouched (In Lakhs)",
+                    data: [83, 164, 683, 525, 256, 55671, 283, 5587, 175],
+                    backgroundColor: "#FF6384",
+                    borderColor: "#FF6384",
+                    borderWidth: 1,
+                    barThickness: 40 // Increases bar size
+                }
+            ]
+        };
+
+        // Chart Config
+        const config = {
+            type: "bar",
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        type: "logarithmic",  // Adjusts to show small values properly
+                        ticks: {
+                            color: "white",
+                            font: { size: 14 }
+                        },
+                        grid: {
+                            display: false // Removed grid lines
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: "white",
+                            font: { size: 14 }
+                        },
+                        grid: {
+                            display: false // Removed grid lines
+                        }
+                    }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: "easeOutBounce"
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: "white",
+                            font: { size: 16 }
+                        }
+                    }
+                }
+            }
+        };
+
+        // Render Chart
+        const myChart = new Chart(ctx, config);
+
+        // GSAP Animations for Smooth Entry
+        gsap.from(".chart-container", {
+            opacity: 0,
+            scale: 0.8,
+            duration: 1.5,
+            ease: "power2.out"
+        });
+
+        gsap.from("h1", {
+            opacity: 0,
+            y: -50,
+            duration: 1.5,
+            ease: "power2.out"
+        });
+    </script>
+
+</body>
+</html>
